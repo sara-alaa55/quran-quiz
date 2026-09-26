@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مسابقة سورة النور</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+        body {
+            background-color: #f4f6f3;
+            color: #2c3e50;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            text-align: center;
+            max-width: 440px;
+            width: 100%;
+            border-top: 6px solid #2e5a44;
+            position: relative;
+        }
+        .screen {
+            display: none;
+        }
+        .screen.active {
+            display: block;
+        }
+        h1 {
+            color: #1e3d2f;
+            font-size: 28px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            font-size: 30px;
+            font-weight: 900;
+            cursor: pointer;
+            color: #2e5a44;
+            transition: transform 0.2s ease, color 0.2s ease;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+        .back-btn:hover {
+            transform: scale(1.15);
+            color: #1e3d2f;
+        }
+        h2 {
+            color: #1e3d2f;
+            font-size: 22px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        p {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        #numberDisplay {
+            font-size: 75px;
+            font-weight: bold;
+            color: #2e5a44;
+            margin: 20px 0;
+            min-height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f0f4f1;
+            border-radius: 12px;
+            transition: transform 0.2s ease;
+        }
+        .btn {
+            background-color: #2e5a44;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 12px rgba(46, 90, 68, 0.15);
+        }
+        .btn:hover {
+            background-color: #234635;
+            transform: translateY(-2px);
+        }
+        .page-label {
+            font-size: 16px;
+            color: #666;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- شاشة الترحيب -->
+        <div id="welcomeScreen" class="screen active">
+            <h1>رَتِّلْ وَارْتَقِ</h1>
+            <p class="subtitle">مسابقة سورة النور</p>
+            <button class="btn" onclick="goToGame()">ابدأ التحدي</button>
+        </div>
+
+        <!-- شاشة السحب العشوائي -->
+        <div id="gameScreen" class="screen">
+            <button class="back-btn" onclick="goHome()" title="الرجوع للرئيسية">&#8592;</button>
+            
+            <h2>سورة النور</h2>
+            
+            
+            <div id="numberDisplay">-</div>
+            
+            <button class="btn" onclick="pickRandomNumber()">اختر  رقم </button>
+        </div>
+    </div>
+
+    <script>
+        function goToGame() {
+            document.getElementById('welcomeScreen').classList.remove('active');
+            document.getElementById('gameScreen').classList.add('active');
+        }
+
+        function goHome() {
+            document.getElementById('gameScreen').classList.remove('active');
+            document.getElementById('welcomeScreen').classList.add('active');
+            document.getElementById('numberDisplay').innerText = "-";
+        }
+
+        function pickRandomNumber() {
+            const randomNum = Math.floor(Math.random() * 10) + 1;
+            const display = document.getElementById('numberDisplay');
+            display.style.transform = "scale(1.1)";
+            display.innerText = randomNum;
+            setTimeout(() => {
+                display.style.transform = "scale(1)";
+            }, 200);
+        }
+    </script>
+
+</body>
+</html>
