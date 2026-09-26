@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مسابقة سورة النور</title>
+    <title>مسابقة سورة الذاريات</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -124,7 +124,7 @@
         <!-- شاشة الترحيب -->
         <div id="welcomeScreen" class="screen active">
             <h1>رَتِّلْ وَارْتَقِ</h1>
-            <p class="subtitle">مسابقة سورة النور</p>
+            <p class="subtitle">مسابقة سورة الذاريات</p>
             <button class="btn" onclick="goToGame()">ابدأ </button>
         </div>
 
@@ -132,7 +132,7 @@
         <div id="gameScreen" class="screen">
             <button class="back-btn" onclick="goHome()" title="الرجوع للرئيسية">&#8592;</button>
             
-            <h2>سورة النور</h2>
+            <h2>سورة الذاريات</h2>
             
             <div id="numberDisplay">-</div>
             
@@ -152,16 +152,18 @@
             document.getElementById('gameScreen').classList.remove('active');
             document.getElementById('welcomeScreen').classList.add('active');
             document.getElementById('numberDisplay').innerText = "-";
-            lastNumber = 0;
+            lastNumber = 0; // بنصفر الرقم الأخير لما نرجع للرئيسية
         }
 
         function pickRandomNumber() {
             let randomNum;
             
+            // حلقة تضمن إن الرقم الجديد مش شبه آخر رقم طلع
             do {
-                randomNum = Math.floor(Math.random() * 10) + 1;
+                randomNum = Math.floor(Math.random() * 6) + 1;
             } while (randomNum === lastNumber);
             
+            // تحديث الرقم الأخير
             lastNumber = randomNum;
 
             const display = document.getElementById('numberDisplay');

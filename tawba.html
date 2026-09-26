@@ -125,7 +125,7 @@
         <div id="welcomeScreen" class="screen active">
             <h1>رَتِّلْ وَارْتَقِ</h1>
             <p class="subtitle">مسابقة سورة التوبة </p>
-            <button class="btn" onclick="goToGame()">ابدأ التحدي</button>
+            <button class="btn" onclick="goToGame()">ابدأ </button>
         </div>
 
         <!-- شاشة السحب العشوائي -->
@@ -134,14 +134,15 @@
             
             <h2>سورة التوبة</h2>
             
-            
             <div id="numberDisplay">-</div>
             
-            <button class="btn" onclick="pickRandomNumber()">اختر  رقم </button>
+            <button class="btn" onclick="pickRandomNumber()">اختر رقم</button>
         </div>
     </div>
 
     <script>
+        let lastNumber = 0; // متغير لحفظ آخر رقم ظهر لمنع تكراره مباشرة
+
         function goToGame() {
             document.getElementById('welcomeScreen').classList.remove('active');
             document.getElementById('gameScreen').classList.add('active');
@@ -151,13 +152,22 @@
             document.getElementById('gameScreen').classList.remove('active');
             document.getElementById('welcomeScreen').classList.add('active');
             document.getElementById('numberDisplay').innerText = "-";
+            lastNumber = 0;
         }
 
         function pickRandomNumber() {
-            const randomNum = Math.floor(Math.random() * 21) + 1;
+            let randomNum;
+            
+            do {
+                randomNum = Math.floor(Math.random() * 21) + 1;
+            } while (randomNum === lastNumber);
+            
+            lastNumber = randomNum;
+
             const display = document.getElementById('numberDisplay');
             display.style.transform = "scale(1.1)";
             display.innerText = randomNum;
+            
             setTimeout(() => {
                 display.style.transform = "scale(1)";
             }, 200);
